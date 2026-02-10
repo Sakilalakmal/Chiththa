@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import {
   StyleSheet,
   TextInput,
+  View,
   type StyleProp,
   type TextInputProps,
   type TextStyle,
@@ -31,20 +32,22 @@ export function Input({
   );
 
   return (
-    <TextInput
-      allowFontScaling
-      onFocus={(event) => {
-        setIsFocused(true);
-        onFocus?.(event);
-      }}
-      onBlur={(event) => {
-        setIsFocused(false);
-        onBlur?.(event);
-      }}
-      placeholderTextColor={placeholderTextColor}
-      style={[styles.container, focusStyle, containerStyle, styles.input, inputStyle]}
-      {...props}
-    />
+    <View style={[styles.container, focusStyle, containerStyle]}>
+      <TextInput
+        allowFontScaling
+        onFocus={(event) => {
+          setIsFocused(true);
+          onFocus?.(event);
+        }}
+        onBlur={(event) => {
+          setIsFocused(false);
+          onBlur?.(event);
+        }}
+        placeholderTextColor={placeholderTextColor}
+        style={[styles.input, inputStyle]}
+        {...props}
+      />
+    </View>
   );
 }
 
@@ -54,9 +57,7 @@ const styles = StyleSheet.create({
     borderWidth: borders.thin,
     borderRadius: radius.md,
     backgroundColor: colors.white,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    color: colors.textPrimary,
+    justifyContent: 'center',
   },
   containerBlurred: {
     borderColor: colors.border,
@@ -66,6 +67,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accentSoft,
   },
   input: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    color: colors.textPrimary,
     fontFamily: typography.families.regular,
     fontSize: typography.sizes.body,
     lineHeight: typography.lineHeights.body,

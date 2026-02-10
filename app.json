@@ -39,7 +39,15 @@
           }
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-sqlite",
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Allow Chiththa to record your voice.",
+          "speechRecognitionPermission": "Allow Chiththa to transcribe your voice notes."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
