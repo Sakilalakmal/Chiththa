@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import { initDb } from '@/src/db';
 import { colors } from '@/theme';
 
 void SplashScreen.preventAutoHideAsync().catch(() => {
@@ -36,6 +37,12 @@ export default function RootLayout() {
       void SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
+
+  useEffect(() => {
+    void initDb().catch((error: unknown) => {
+      console.error('[db:init] failed at startup', error);
+    });
+  }, []);
 
   if (!fontsLoaded) {
     return null;
